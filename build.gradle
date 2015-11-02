@@ -1,0 +1,35 @@
+group 'edu.cornell.cac'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'application'
+
+sourceCompatibility = 1.7
+
+mainClassName = 'edu.cornell.cac.spark.examples.graphx.LiveJournalPageRank'
+
+project.ext.versions = [
+        scala: "2.10",
+        spark: "1.2.0"
+]
+
+project.ext.libs = [
+        scala      : "org.scala-lang:scala-library:$versions.scala.6", //ugly .6 hack
+        spark      : "org.apache.spark:spark-core_$versions.scala:$versions.spark",
+        sparkGraphX: "org.apache.spark:spark-graphx_$versions.scala:$versions.spark",
+]
+
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile([
+            libs.spark,
+            libs.sparkGraphX,
+    ])
+}
+
